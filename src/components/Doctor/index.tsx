@@ -3,8 +3,9 @@ import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import { api } from "@config/api";
 import { DOCTORS_PATH } from "@config/paths";
 import useGetDetail from "@hooks/useGetDetail";
-import { getPath } from "@lib/utils";
-import { Avatar, Box, Card, CardContent, Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getPath } from "@lib/utils";
+import { Avatar, Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -34,6 +35,8 @@ const Doctor: React.FC = () => {
 
   const [doctor, loading] = useGetDetail(api.doctors.getDoctor, emptyDoctor, doctorId);
 
+  const avatarUrl = generateAvatarImage(DetailType.DOCTOR, doctor.id);
+
   return (
     <div>
       <Breadcrumb>
@@ -42,57 +45,72 @@ const Doctor: React.FC = () => {
         </BreadcrumbEl>
         <BreadcrumbEl active>{loading ? "Loading..." : `${doctor.name} ${doctor.surname}`}</BreadcrumbEl>
       </Breadcrumb>
-      <Box sx={{ px: 4, py: 2 }}>
-        {/* Doctor Info Card */}
-        <Card sx={{ display: "flex", mb: 4 }}>
-          <Box sx={{ display: "flex", alignItems: "center", p: 2 }}>
-            <Avatar
-              alt={`${doctor.name} ${doctor.surname}`}
-              src={doctor.avatar}
-              sx={{ width: 64, height: 64, mr: 2 }}
-            />
-            <Box>
-              <Typography variant="h6">
-                {doctor.name} <b>{doctor.surname}</b>
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                {doctor.profession || "Professione non specificata"}
-              </Typography>
-            </Box>
+
+      <Box
+        sx={{
+          px: 4,
+          py: 2,
+          maxWidth: 900,
+          mx: "auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Doctor Info Card - larga */}
+        <Card
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            p: 2,
+            mb: 0,
+          }}
+        >
+          <Avatar
+            alt={`${doctor.name} ${doctor.surname}`}
+            src={avatarUrl || doctor.avatar || "/default-avatar.png"}
+            sx={{ width: 80, height: 80, mr: 3 }}
+          />
+          <Box>
+            <Typography variant="h5">
+              {doctor.name} <b>{doctor.surname}</b>
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {doctor.profession || "Professione non specificata"}
+            </Typography>
           </Box>
         </Card>
 
-        {/* Contact Info + Last Patients */}
-        <Grid container spacing={3} mb={4}>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Contacts
-                </Typography>
-                <Typography variant="body2">📞 {doctor.phoneNumber || "N/A"}</Typography>
-                <Typography variant="body2">📧 {doctor.email || "N/A"}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Last Visited Patients
-                </Typography>
-                <List dense>
-                  <ListItem>
-                    <ListItemText primary="Enrico Costanzi" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary="Carlo Marchiori" />
-                  </ListItem>
-                </List>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        {/* Contact Info Card - molto più stretta e attaccata */}
+        <Card
+          sx={{
+            backgroundColor: "#333",
+            color: "#fff",
+            width: "25%", // circa metà rispetto al 50% precedente
+            minHeight: 180,
+            mt: 0, // attaccata alla card sopra, senza margine
+            alignSelf: "flex-start",
+            p: 2,
+            borderTopLeftRadius: 0, // per sembrare attaccata, togli il bordo sopra a sx
+            borderTopRightRadius: 0, // stesso per destra
+          }}
+        >
+          <CardContent>
+            <Typography variant="h6" gutterBottom sx={{ color: "#fff" }}>
+              Contacts
+            </Typography>
+            <Divider sx={{ bgcolor: "white", mb: 2 }} />
+            <Typography variant="body2">📞 {doctor.phoneNumber || "N/A"}</Typography>
+            <Typography variant="body2" mb={2}>
+              📧 {doctor.email || "N/A"}
+            </Typography>
+
+            <Typography variant="subtitle1" sx={{ mt: 3, color: "#fff", fontWeight: "bold" }}>
+              LAST VISITED PATIENTS
+            </Typography>
+            <Divider sx={{ bgcolor: "white", mt: 1 }} />
+          </CardContent>
+        </Card>
       </Box>
     </div>
   );
