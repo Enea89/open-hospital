@@ -10,7 +10,8 @@ export function useGetList<T extends object, F extends object>(
     filter: F,
     options?: AxiosRequestConfig<any> | undefined
   ) => Promise<AxiosResponse<T[]>>,
-  filter: F
+  filter: F,
+  manualTrigger: boolean = false
 ) {
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
@@ -28,9 +29,13 @@ export function useGetList<T extends object, F extends object>(
       .finally(() => {
         setLoading(false);
       });
-  }, [filter, getListApi, setLoading, setRecords]);
+  }, [filter, getListApi, enqueueSnackbar]);
 
-  useEffect(getList, [getList]);
+  useEffect(() => {
+    if (!manualTrigger) {
+      getList();
+    }
+  }, [getList, manualTrigger]);
 
   return [records, loading, getList] as [T[], boolean, () => void];
 }

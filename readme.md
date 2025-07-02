@@ -85,13 +85,13 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
 ## TO DO LIST - CodyLab Rookie - Front-end
 
 - [ ] Doctors Database
-  - [ ] Lista dei dottori
-    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
-    - [ ] Creare un componente per la scheda di anteprima di un dottore
-    - [ ] Creare un componente che gestisca la lista dei dottori
-    - [ ] Creare un componente che gestisca il form di filtro
-    - [ ] Agganciare le API per far ritornare la lista dei dottori presenti nel database
-    - [ ] Agganciare le API al filtro di ricerca dei dottori
+  - [x] Lista dei dottori
+    - [x] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [x] Creare un componente per la scheda di anteprima di un dottore
+    - [x] Creare un componente che gestisca la lista dei dottori
+    - [x] Creare un componente che gestisca il form di filtro
+    - [x] Agganciare le API per far ritornare la lista dei dottori presenti nel database
+    - [x] Agganciare le API al filtro di ricerca dei dottori
   - [ ] Dettaglio del dottore
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creare un componente che gestisca la scheda di dettaglio di un dottore
@@ -99,9 +99,9 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
     - [ ] Agganciare le API per far ritornare il dettaglio del dottore
     - [ ] Agganciare le API per far ritornare la lista dei pazienti assegnati al dottore
   - [ ] Form gestione delle informazioni di un dottore
-    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
-    - [ ] Creazione del componente che gestisce il form per la creazione/modifica di un dottore
-    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo dottore agganciando le relative API di POST
+    - [x] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [x] Creazione del componente che gestisce il form per la creazione/modifica di un dottore
+    - [x] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo dottore agganciando le relative API di POST
     - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un dottore agganciando le relative API di GET e PUT
 - [ ] Patients Database
   - [ ] Lista dei pazienti

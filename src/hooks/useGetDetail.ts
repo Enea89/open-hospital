@@ -24,7 +24,7 @@ export function useGetDetail<T extends object>(
       });
   }, [getDetailApi, newRecord, setLoading, setRecord]);
 
-  useEffect(getDetail, [getDetail]);
+  useEffect(getDetail, []);
 
   return [record, loading, getDetail] as [T, boolean, () => void];
 }

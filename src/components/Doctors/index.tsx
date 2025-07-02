@@ -1,45 +1,37 @@
-import React, { Dispatch, useMemo, useReducer } from "react";
+import { Button, Grid, Typography } from "@mui/material";
+import React, { useMemo, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { getListDoctor } from "../../config/api";
 import { DoctorFilterDTO } from "../../generated/axios";
+import useGetList from "../../hooks/useGetList";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import DoctorList from "../Doctors/doctorList";
+import DoctorFilterForm from "./doctorFilterForm";
+import DoctorList from "./doctorList";
 import { Action, doctorsFilterReducer } from "./lib";
 
 interface IDoctorsFilterContext {
   filter: DoctorFilterDTO;
-  dispatch: Dispatch<Action>;
+  dispatch: React.Dispatch<Action>;
 }
 
-export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
-  filter: {},
-  dispatch: (action) => {},
+export const DoctorsFilterContext = React.createContext<IDoctorsFilterContext>({
+  filter: {} as DoctorFilterDTO,
+  dispatch: () => {},
 });
 
 const Doctors: React.FC = () => {
-  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
+  const [filter, dispatch] = useReducer(doctorsFilterReducer, {} as DoctorFilterDTO);
   const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
-  // Dati finti per testare la lista
-  const fakeDoctors = [
-    {
-      id: 1,
-      name: "Mario",
-      surname: "Rossi",
-      email: "mario.rossi@example.com",
-      phoneNumber: "1234567890",
-      avatar: "",
-      profession: "Cardiologo",
-    },
-    {
-      id: 2,
-      name: "Anna",
-      surname: "Bianchi",
-      email: "anna.bianchi@example.com",
-      phoneNumber: "0987654321",
-      avatar: "",
-      profession: "Neurologa",
-    },
-  ];
+  const [doctors, loading, reload] = useGetList(getListDoctor, filter);
+
+  const navigate = useNavigate();
+
+  const handleNewDoctorClick = () => {
+    navigate("/doctors/new");
+  };
 
   return (
     <DoctorsFilterContext.Provider value={doctorsContextValue}>
@@ -47,10 +39,22 @@ const Doctors: React.FC = () => {
         <BreadcrumbEl active>Doctors</BreadcrumbEl>
       </Breadcrumb>
 
-      {/* Qui puoi aggiungere il form per il filtro più avanti */}
+      <Grid container alignItems="center" justifyContent="space-between" mb={2}>
+        <Grid item>
+          <Typography variant="h6" fontWeight="bold">
+            DOCTORS DATABASE
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Button variant="outlined" color="primary" onClick={handleNewDoctorClick}>
+            + Add New Doctor
+          </Button>
+        </Grid>
+      </Grid>
 
-      {/* Lista dei dottori */}
-      <DoctorList doctors={fakeDoctors} />
+      <DoctorFilterForm />
+
+      {loading ? <p>Loading...</p> : <DoctorList doctors={doctors} />}
     </DoctorsFilterContext.Provider>
   );
 };

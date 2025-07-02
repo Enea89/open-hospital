@@ -1,4 +1,8 @@
+import { DetailType } from "@lib/types";
+import { generateAvatarImage } from "@lib/utils";
+import { Avatar, Box, Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Doctor {
   id?: number;
@@ -15,33 +19,45 @@ interface DoctorCardProps {
 }
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
+  const navigate = useNavigate();
+  const avatarUrl = generateAvatarImage(DetailType.DOCTOR, doctor.id);
+
+  const handleNavigate = () => {
+    if (doctor.id) {
+      navigate(`/doctors/${doctor.id}`);
+    }
+  };
+
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: 8,
-        padding: "1rem",
-        width: 250,
-      }}
-    >
-      <img
-        src={doctor.avatar || "/default-avatar.png"}
-        alt={`${doctor.name} ${doctor.surname}`}
-        style={{ width: "100%", borderRadius: "50%" }}
-      />
-      <h3>
-        {doctor.name} {doctor.surname}
-      </h3>
-      <p>
-        <strong>Email:</strong> {doctor.email}
-      </p>
-      <p>
-        <strong>Telefono:</strong> {doctor.phoneNumber}
-      </p>
-      <p>
-        <strong>Professione:</strong> {doctor.profession}
-      </p>
-    </div>
+    <Card sx={{ width: 280, borderRadius: 2 }}>
+      <CardContent>
+        <Stack alignItems="center" spacing={1}>
+          <Avatar
+            alt={`${doctor.name} ${doctor.surname}`}
+            src={avatarUrl || "/default-avatar.png"}
+            sx={{ width: 80, height: 80, cursor: "pointer" }}
+            onClick={handleNavigate}
+          />
+          <Typography variant="h6" textAlign="center" sx={{ cursor: "pointer" }} onClick={handleNavigate}>
+            {doctor.name}{" "}
+            <Box component="span" fontWeight="bold">
+              {doctor.surname}
+            </Box>
+          </Typography>
+          <Typography color="text.secondary" textAlign="center" variant="body2" sx={{ mb: 1 }}>
+            {doctor.profession}
+          </Typography>
+          <Typography color="error.light" textAlign="center" sx={{ fontWeight: "bold" }} variant="body2">
+            📞 {doctor.phoneNumber}
+          </Typography>
+          <Typography color="error.light" textAlign="center" sx={{ fontWeight: "bold" }} variant="body2">
+            ✉️ {doctor.email}
+          </Typography>
+        </Stack>
+
+        <Divider sx={{ my: 2 }} />
+      </CardContent>
+    </Card>
   );
 };
 

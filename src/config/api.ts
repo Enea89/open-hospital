@@ -1,6 +1,10 @@
 import { Configuration, DoctorApiApi, PatientApiApi, PatientRecordApiApi } from "@generated/axios";
 import axios from "axios";
 
+export function getListDoctor(page: number, size: number, sort: string, filter: any) {
+  return api.doctors.getListDoctor(page, size, sort, filter);
+}
+
 /**
  * Api endpoint
  */

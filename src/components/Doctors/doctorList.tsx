@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React from "react";
 import DoctorCard from "./doctorCard";
 
@@ -17,11 +18,13 @@ interface DoctorListProps {
 
 const DoctorList: React.FC<DoctorListProps> = ({ doctors }) => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <Grid container spacing={2}>
       {doctors.map((doctor) => (
-        <DoctorCard key={doctor.id} doctor={doctor} />
+        <Grid item key={doctor.id} xs={12} sm={6} md={4} lg={3}>
+          <DoctorCard doctor={doctor} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 
