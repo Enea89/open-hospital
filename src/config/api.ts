@@ -4,6 +4,9 @@ import axios from "axios";
 export function getListDoctor(page: number, size: number, sort: string, filter: any) {
   return api.doctors.getListDoctor(page, size, sort, filter);
 }
+export function getListPatient(page: number, size: number, sort: string, filter: any) {
+  return api.patients.getListPatient(page, size, sort, filter);
+}
 
 /**
  * Api endpoint

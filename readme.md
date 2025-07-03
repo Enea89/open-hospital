@@ -105,11 +105,11 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
     - [x] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un dottore agganciando le relative API di GET e PUT
 - [ ] Patients Database
   - [ ] Lista dei pazienti
-    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
-    - [ ] Creare un componente per la scheda di anteprima di un paziente
-    - [ ] Creare un componente che gestisca la lista dei pazienti
+    - [x] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [x] Creare un componente per la scheda di anteprima di un paziente
+    - [x] Creare un componente che gestisca la lista dei pazienti
     - [ ] Creare un componente che gestisca il form di filtro
-    - [ ] Agganciare le API per far ritornare la lista dei pazienti presenti nel database
+    - [x] Agganciare le API per far ritornare la lista dei pazienti presenti nel database
     - [ ] Agganciare le API al filtro di ricerca dei pazienti
   - [ ] Dettaglio del paziente
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare

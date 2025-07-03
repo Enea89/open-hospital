@@ -12,24 +12,20 @@
  * Do not edit the class manually.
  */
 
+import globalAxios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
 import { Configuration } from "./configuration";
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
   DUMMY_BASE_URL,
   assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
-  setSearchParams,
-  serializeDataIfNeeded,
-  toPathString,
   createRequestFunction,
+  serializeDataIfNeeded,
+  setSearchParams,
+  toPathString,
 } from "./common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from "./base";
+import { BASE_PATH, BaseAPI, RequestArgs, RequiredError } from "./base";
 
 /**
  *
@@ -123,6 +119,9 @@ export interface DoctorFilterDTO {
  * @interface PatientDTO
  */
 export interface PatientDTO {
+  firstName: string;
+  lastName: string;
+  pid: string;
   /**
    *
    * @type {number}
