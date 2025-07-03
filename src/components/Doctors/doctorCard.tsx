@@ -1,5 +1,7 @@
 import { DetailType } from "@lib/types";
 import { generateAvatarImage } from "@lib/utils";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Box, Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -48,10 +50,10 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
             {doctor.profession}
           </Typography>
           <Typography color="error.light" textAlign="center" sx={{ fontWeight: "bold" }} variant="body2">
-            📞 {doctor.phoneNumber}
+            <PhoneIcon sx={{ verticalAlign: "bottom" }} fontSize="small" /> {doctor.phoneNumber}
           </Typography>
           <Typography color="error.light" textAlign="center" sx={{ fontWeight: "bold" }} variant="body2">
-            ✉️ {doctor.email}
+            <MailOutlineIcon sx={{ verticalAlign: "bottom" }} fontSize="small" /> {doctor.email}
           </Typography>
         </Stack>
 

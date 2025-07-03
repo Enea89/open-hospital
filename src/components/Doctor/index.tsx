@@ -4,10 +4,13 @@ import { api } from "@config/api";
 import { DOCTORS_PATH } from "@config/paths";
 import useGetDetail from "@hooks/useGetDetail";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getPath } from "@lib/utils";
-import { Avatar, Box, Card, CardContent, Divider, Typography } from "@mui/material";
+import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
+import EditIcon from "@mui/icons-material/Edit";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneIcon from "@mui/icons-material/Phone";
+import { Avatar, Box, Card, CardContent, Divider, IconButton, Typography } from "@mui/material";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 interface Doctor {
   id?: number;
@@ -32,6 +35,16 @@ const emptyDoctor: Doctor = {
 const Doctor: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const doctorId = Number(id);
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    if (!id) {
+      console.error("ID mancante");
+      return;
+    }
+    const path = getEditDetailPath("doctors", id);
+    navigate(path);
+  };
 
   const [doctor, loading] = useGetDetail(api.doctors.getDoctor, emptyDoctor, doctorId);
 
@@ -50,13 +63,13 @@ const Doctor: React.FC = () => {
         sx={{
           px: 4,
           py: 2,
-          maxWidth: 900,
-          mx: "auto",
+          maxWidth: 1400,
+          transform: "translateX(-35px)",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        {/* Doctor Info Card - larga */}
+        {/* Doctor Info Card */}
         <Card
           sx={{
             display: "flex",
@@ -72,27 +85,32 @@ const Doctor: React.FC = () => {
             sx={{ width: 80, height: 80, mr: 3 }}
           />
           <Box>
-            <Typography variant="h5">
-              {doctor.name} <b>{doctor.surname}</b>
-            </Typography>
+            <Box display="flex" alignItems="center" gap={1}>
+              <Typography variant="h5">
+                {doctor.name} <b>{doctor.surname}</b>
+              </Typography>
+              <IconButton color="error" onClick={handleEditClick} aria-label="edit details">
+                <EditIcon />
+              </IconButton>
+            </Box>
             <Typography variant="subtitle1" color="text.secondary">
               {doctor.profession || "Professione non specificata"}
             </Typography>
           </Box>
         </Card>
 
-        {/* Contact Info Card - molto più stretta e attaccata */}
+        {/* Contact Info Card */}
         <Card
           sx={{
             backgroundColor: "#333",
             color: "#fff",
-            width: "25%", // circa metà rispetto al 50% precedente
-            minHeight: 180,
-            mt: 0, // attaccata alla card sopra, senza margine
+            width: "20%",
+            minHeight: 225,
+            mt: 0,
             alignSelf: "flex-start",
             p: 2,
-            borderTopLeftRadius: 0, // per sembrare attaccata, togli il bordo sopra a sx
-            borderTopRightRadius: 0, // stesso per destra
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
           }}
         >
           <CardContent>
@@ -100,9 +118,13 @@ const Doctor: React.FC = () => {
               Contacts
             </Typography>
             <Divider sx={{ bgcolor: "white", mb: 2 }} />
-            <Typography variant="body2">📞 {doctor.phoneNumber || "N/A"}</Typography>
-            <Typography variant="body2" mb={2}>
-              📧 {doctor.email || "N/A"}
+            <Typography variant="body2">
+              <PhoneIcon sx={{ color: "red", verticalAlign: "bottom", mr: 1 }} fontSize="small" />{" "}
+              {doctor.phoneNumber || "N/A"}
+            </Typography>
+            <Typography variant="body2" mb={2} mt={1}>
+              <MailOutlineIcon sx={{ color: "red", verticalAlign: "bottom", mr: 1 }} fontSize="small" />{" "}
+              {doctor.email || "N/A"}
             </Typography>
 
             <Typography variant="subtitle1" sx={{ mt: 3, color: "#fff", fontWeight: "bold" }}>

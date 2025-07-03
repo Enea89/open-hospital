@@ -1,12 +1,20 @@
+import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 interface DoctorFormProps {
-  onSave?: (data: { name: string; surname: string; profession: string; email: string; phoneNumber: string }) => void;
+  title?: string;
   loading?: boolean;
+  initialValues?: {
+    name: string;
+    surname: string;
+    profession: string;
+    email: string;
+    phoneNumber: string;
+  };
+  onSave?: (data: { name: string; surname: string; profession: string; email: string; phoneNumber: string }) => void;
 }
 
-const DoctorForm: React.FC<DoctorFormProps> = ({ onSave, loading }) => {
+const DoctorForm: React.FC<DoctorFormProps> = ({ title = "New Doctor", loading, initialValues, onSave }) => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -23,8 +31,26 @@ const DoctorForm: React.FC<DoctorFormProps> = ({ onSave, loading }) => {
     phoneNumber: false,
   });
 
+  useEffect(() => {
+    if (initialValues) {
+      setFormData(initialValues);
+    }
+  }, [initialValues]);
+
+  const capitalize = (str: string) => {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   const handleChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [field]: event.target.value }));
+    let value = event.target.value;
+
+    if (field === "name" || field === "surname" || field === "profession") {
+      value = capitalize(value);
+    } else if (field === "email") {
+      value = value.toLowerCase();
+    }
+    setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: false }));
   };
 
@@ -87,7 +113,7 @@ const DoctorForm: React.FC<DoctorFormProps> = ({ onSave, loading }) => {
   return (
     <Box maxWidth={900} mx="auto" px={2}>
       <Typography variant="h6" mb={2} textAlign="left">
-        New Doctor
+        {title}
       </Typography>
 
       <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
@@ -171,8 +197,9 @@ const DoctorForm: React.FC<DoctorFormProps> = ({ onSave, loading }) => {
             onClick={handleSave}
             disabled={loading}
             sx={{ minWidth: 60, height: 36 }}
+            endIcon={!loading ? <SaveIcon /> : undefined}
           >
-            {loading ? "Saving..." : "Save 💾"}
+            {loading ? "Saving..." : "Save "}
           </Button>
           <Button variant="outlined" onClick={() => window.history.back()} sx={{ minWidth: 60, height: 36 }}>
             Back

@@ -13,11 +13,6 @@ const DoctorNew: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const capitalizeName = (str: string) => {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-
   const handleSave = async (data: {
     name: string;
     surname: string;
@@ -27,16 +22,8 @@ const DoctorNew: React.FC = () => {
   }) => {
     setLoading(true);
 
-    const normalizedData = {
-      ...data,
-      name: capitalizeName(data.name),
-      surname: capitalizeName(data.surname),
-      profession: capitalizeName(data.profession),
-      email: data.email.toLowerCase(),
-    };
-
     try {
-      await api.doctors.createDoctor(normalizedData);
+      await api.doctors.createDoctor(data);
       enqueueSnackbar("Doctor created successfully!", { variant: "success" });
       navigate("/doctors");
     } catch (error: any) {
