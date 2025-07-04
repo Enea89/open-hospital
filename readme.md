@@ -112,16 +112,16 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
     - [x] Agganciare le API per far ritornare la lista dei pazienti presenti nel database
     - [ ] Agganciare le API al filtro di ricerca dei pazienti
   - [ ] Dettaglio del paziente
-    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
-    - [ ] Creare un componente che gestisca la scheda di dettaglio di un paziente
+    - [x] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [x] Creare un componente che gestisca la scheda di dettaglio di un paziente
     - [ ] Creare un componente che gestisca la lista dei record assegnati al paziente
-    - [ ] Agganciare le API per far ritornare il dettaglio del paziente
+    - [x] Agganciare le API per far ritornare il dettaglio del paziente
     - [ ] Agganciare le API per far ritornare la lista dei record assegnati al paziente
   - [ ] Form gestione delle informazioni di un paziente
-    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
-    - [ ] Creazione del componente che gestisce il form per la creazione/modifica di un paziente
-    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo paziente agganciando le relative API di POST
-    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un paziente agganciando le relative API di GET e PUT
+    - [x] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [x] Creazione del componente che gestisce il form per la creazione/modifica di un paziente
+    - [x] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo paziente agganciando le relative API di POST
+    - [] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un paziente agganciando le relative API di GET e PUT
   - [ ] Form gestione delle informazioni di un record di un paziente
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creazione del componente che gestisce il form per la creazione di un record paziente

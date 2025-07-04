@@ -69,7 +69,6 @@ const Doctor: React.FC = () => {
           flexDirection: "column",
         }}
       >
-        {/* Doctor Info Card */}
         <Card
           sx={{
             display: "flex",

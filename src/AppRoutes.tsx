@@ -5,7 +5,7 @@ import DoctorNew from "@components/Doctor/doctorNew";
 import Doctors from "@components/Doctors";
 import Home from "@components/Home";
 import News from "@components/News";
-import Patient from "@components/Patient";
+import Patient from "@components/patient";
 import PatientNew from "@components/patient/patientNew";
 import Patients from "@components/patients";
 import Pharmacy from "@components/Pharmacy";
