@@ -126,7 +126,7 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creazione del componente che gestisce il form per la creazione di un record paziente
     - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo record paziente agganciando le relative API di POST
-    - [] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un record paziente agganciando le relative API di GET e PUT
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un record paziente agganciando le relative API di GET e PUT
 
 ## License
 
