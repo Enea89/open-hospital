@@ -119,8 +119,8 @@ export interface DoctorFilterDTO {
  * @interface PatientDTO
  */
 export interface PatientDTO {
-  firstName: string;
-  lastName: string;
+  name: string;
+  surname: string;
   pid: string;
   /**
    *

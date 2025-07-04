@@ -4,14 +4,14 @@ import { Avatar, Box, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 
 interface PatientCardProps {
-  firstName: string;
-  lastName: string;
+  name: string;
+  surname: string;
   pid: string | number;
   opd: string | number;
   idp: string | number;
 }
 
-const PatientCard: React.FC<PatientCardProps> = ({ firstName, lastName, pid, opd, idp }) => {
+const PatientCard: React.FC<PatientCardProps> = ({ name, surname, pid, opd, idp }) => {
   const avatarSrc = typeof pid === "number" ? generateAvatarImage(DetailType.PATIENT, pid) : "";
 
   return (
@@ -27,7 +27,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ firstName, lastName, pid, opd
     >
       <CardContent>
         <Typography variant="h6" component="div" gutterBottom sx={{ fontWeight: "bold", textAlign: "center" }}>
-          {firstName} {lastName}
+          {name} {surname}
         </Typography>
 
         <Box
@@ -63,7 +63,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ firstName, lastName, pid, opd
             height: 96,
           }}
         >
-          {firstName.charAt(0)}
+          {name.charAt(0)}
         </Avatar>
       </Box>
     </Card>

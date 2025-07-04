@@ -14,8 +14,8 @@ const PatientList: React.FC<PatientListProps> = ({ patients }) => {
         <Grid item key={patient.id} xs={12} sm={12} md={6} lg={6} xl={4}>
           <Box display="flex" justifyContent="center">
             <PatientCard
-              firstName={patient.name ?? ""}
-              lastName={patient.surname ?? ""}
+              name={patient.name ?? ""}
+              surname={patient.surname ?? ""}
               pid={patient.id ?? ""}
               opd={patient.opd ?? ""}
               idp={patient.idp ?? ""}
